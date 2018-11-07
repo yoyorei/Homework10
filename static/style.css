@@ -1,0 +1,9 @@
+table {width: auto;}
+#table{padding-left:8px;
+padding-right:8px;}
+.thead{text-align: none;
+font-size: 15px}
+#weather{font-size: 16px;}
+#news{font-size: 16px;}
+.card-subtitle{padding-bottom: 8px;}
+h5{font-size: 19px;}

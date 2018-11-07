@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    
+</head>
+
+<body>
+    <script src="Scripts/umd/popper.min.js"></script>
+    <nav class="jumbotron nav navbar navbar-toggleable-xs navbar-toggleable-sm navbar-expand-md navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="navbar-collapse collapse" id="navbarNav">
+            <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+            <a class="navbar-brand mx-auto" href="/"><h1><strong>Mission to Mars</strong></h1></a>
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mars Hemisphere Images
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#fig1">Cerberus Hemisphere</a>
+                  <a class="dropdown-item" href="#fig2">Schiaparelli Hemisphere</a>
+                  <a class="dropdown-item" href="#fig3">Syrtis Major Hemisphere</a>
+                  <a class="dropdown-item" href="#fig4">Valles Marineris Hemisphere</a>
+                </div>
+              </div>
+        </div>
+    </nav>
+
+
+{% for record in mars_data %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>LASTEST MARS NEWS</strong></h4>
+                        <hr>
+                        <h5 class="card-subtitle"> {{ record.news_title }} </h5>
+                        <div id="news">{{ record.news_p }}</div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title"><strong>FEATURED MARS IMAGE</strong></h4>
+                        <hr>
+                        <img class="img-rounded img-fluid" src= "{{ record.featured_image_url }}" alt="featured_image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><strong>CURRENT WEATHER ON MARS</strong></h4>
+                        <hr>
+                        <div id="weather">{{ record.mars_weather }}</div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><strong>MARS FACTS</strong></h4>
+                        <hr>
+                        <div id="table">{{ record.html_table|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="fig1">
+                        <figure>
+                            <h4 class="card-title"><strong>{{record.hemisphere_image_urls[0].title}}</strong></h4>
+                            <img class="img-fluid" src= "{{ record.hemisphere_image_urls[0].img_url}}" alt="fig1">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="fig2">
+                        <figure>
+                            <h4 class="card-title"><strong>{{record.hemisphere_image_urls[1].title}}</strong></h4>
+                            <img class="img-fluid" src= "{{ record.hemisphere_image_urls[1].img_url}}" alt="fig2">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="fig3">
+                        <figure>
+                            <h4 class="card-title"><strong>{{record.hemisphere_image_urls[2].title}}</strong></h4>
+                            <img class="img-fluid" src= "{{ record.hemisphere_image_urls[2].img_url}}" alt="fig3">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body" id="fig4">
+                        <figure>
+                            <h4 class="card-title"><strong>{{record.hemisphere_image_urls[3].title}}</strong></h4>
+                            <img class="img-fluid" src= "{{ record.hemisphere_image_urls[3].img_url}}" alt="fig4">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</body>
+</html>
